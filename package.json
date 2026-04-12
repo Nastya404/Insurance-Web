@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "ejs": "^5.0.2",
+    "express": "^5.2.1",
+    "sass": "^1.99.0"
+  },
+  "name": "lab8",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "sass": "sass public/stylesheets/style.scss public/stylesheets/style.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}

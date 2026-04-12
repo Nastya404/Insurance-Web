@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <title>СтрахГарант</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+</head>
+
+<body>
+  <header class="header">
+    <h2 class="header__title">СтрахГарант</h2>
+    <div class="header__info">Страховая организация</div>
+  </header>
+
+  <nav class="nav">
+    <button onclick="switchToMainPage()">Главная</button>
+    <button onclick="switchToProductsPage()">Страховые продукты</button>
+    <button onclick="switchToAboutPage()">О нас</button>
+    <button onclick="switchToPoliciesPage()">Управление</button>
+  </nav>
+
+  <div id="IPage"></div>
+
+  <script src="/javascripts/app.js"></script>
+</body>
+
+</html>

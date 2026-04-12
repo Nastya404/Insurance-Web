@@ -1,0 +1,358 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  background-color: #f5f9ff;
+  color: #222;
+}
+
+.header {
+  padding: 0.75rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: #fff;
+  border-bottom: 2px solid #3a9be1;
+}
+.header__info {
+  background-color: #daeeff;
+  color: #1a6fad;
+  border-radius: 2rem;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+.header__title {
+  font-size: 1.6rem;
+  color: #1a6fad;
+}
+
+.first-page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  text-align: center;
+}
+.first-page__title {
+  font-size: 1.8rem;
+  color: #1a6fad;
+}
+.first-page__paragraph {
+  max-width: 560px;
+  line-height: 1.7;
+  color: #555;
+}
+.first-page__type {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.first-page__type-card {
+  flex: 1 1 180px;
+  max-width: 220px;
+  padding: 1.5rem 1rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.5rem;
+  background-color: #fff;
+  border: 1px solid #b8ddf7;
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+  transition: border ease 0.2s;
+  z-index: 0;
+}
+.first-page__type-card::before {
+  content: "";
+  position: absolute;
+  bottom: -100%;
+  right: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(198, 229, 255, 0.7921568627);
+  border-radius: 20%;
+  transition: all 0.4s ease;
+  z-index: -1;
+}
+.first-page__type-card:hover::before {
+  bottom: -20%;
+  right: -20%;
+  width: 200%;
+  height: 200%;
+}
+.first-page__type-card:hover {
+  border: 2px solid #49aaf0;
+}
+.first-page__type-card .fa {
+  font-size: 2rem;
+  color: #3a9be1;
+}
+
+.btn {
+  padding: 0.6rem 1.5rem;
+  font-size: 0.95rem;
+  font-family: "Roboto", sans-serif;
+  color: #fff;
+  background-color: #3a9be1;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color ease 0.2s;
+}
+.btn:hover {
+  background-color: #1a6fad;
+}
+
+.first-page__btn,
+.back-btn {
+  padding: 0.6rem 1.5rem;
+  font-size: 0.95rem;
+  font-family: "Roboto", sans-serif;
+  color: #fff;
+  background-color: #3a9be1;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color ease 0.2s;
+}
+.first-page__btn:hover,
+.back-btn:hover {
+  background-color: #1a6fad;
+}
+.first-page__btn,
+.back-btn {
+  margin-top: 0.5rem;
+}
+
+.second-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+.second-page__header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.second-page__header h2 {
+  font-size: 1.4rem;
+  color: #1a6fad;
+}
+
+.products-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #b8ddf7;
+}
+.products-table thead {
+  background-color: #3a9be1;
+  color: #fff;
+}
+.products-table th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+.products-table td {
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid #daeeff;
+  vertical-align: top;
+  line-height: 1.5;
+}
+.products-table tbody tr:hover {
+  background-color: #daeeff;
+}
+
+.description-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #b8ddf7;
+}
+.description-table thead {
+  background-color: #3a9be1;
+  color: #fff;
+}
+.description-table th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+.description-table td {
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid #daeeff;
+  vertical-align: top;
+  line-height: 1.5;
+}
+.description-table tbody tr:hover {
+  background-color: #daeeff;
+}
+
+.hidden {
+  display: none;
+}
+
+.nav {
+  display: flex;
+  gap: 1rem;
+  padding: 0.6rem 2rem;
+  background-color: #fff;
+  border-bottom: 1px solid #daeeff;
+}
+.nav button {
+  padding: 0.4rem 1rem;
+  font-size: 0.9rem;
+  color: #1a6fad;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color ease 0.2s;
+}
+.nav button:hover {
+  background-color: #daeeff;
+}
+.nav button.active {
+  background-color: #3a9be1;
+  color: #fff;
+}
+.nav.load {
+  display: flex;
+  justify-content: center;
+  background-color: initial;
+  border-bottom: none;
+}
+.nav.load button {
+  border: 1px solid #1a6fad;
+}
+
+.welcome-title {
+  font-size: 1.8rem;
+  color: #1a6fad;
+  margin-bottom: 0.5rem;
+}
+
+.welcome-text {
+  max-width: 560px;
+  line-height: 1.7;
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+
+.cards-grid {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.type-card {
+  flex: 1 1 180px;
+  max-width: 220px;
+  padding: 1.5rem 1rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.5rem;
+  background-color: #fff;
+  border: 1px solid #b8ddf7;
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+  transition: border ease 0.2s;
+  z-index: 0;
+}
+.type-card::before {
+  content: "";
+  position: absolute;
+  bottom: -100%;
+  right: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(198, 229, 255, 0.7921568627);
+  border-radius: 20%;
+  transition: all 0.4s ease;
+  z-index: -1;
+}
+.type-card:hover {
+  border: 2px solid #49aaf0;
+}
+.type-card:hover::before {
+  bottom: -20%;
+  right: -20%;
+  width: 200%;
+  height: 200%;
+}
+.type-card .fa {
+  font-size: 2rem;
+  color: #3a9be1;
+}
+
+.card-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1a6fad;
+}
+
+.card-p {
+  font-size: 0.85rem;
+  color: #555;
+  line-height: 1.5;
+  text-align: center;
+}
+
+#IPage {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  text-align: center;
+}
+#IPage:has(.products-table) {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.about-block {
+  max-width: 600px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.about-block h3 {
+  font-size: 1.4rem;
+  color: #1a6fad;
+  margin-bottom: 0.25rem;
+}
+.about-block p {
+  line-height: 1.7;
+  color: #555;
+}
+
+/*# sourceMappingURL=style.css.map */
