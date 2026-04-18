@@ -1,4 +1,5 @@
-const express = require('express');
+import express from 'express';
+
 const app = express();
 const PORT = 3000;
 
@@ -8,7 +9,7 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 app.set('views', './views'); 
 
-const rest = require('./rest');
+import rest from "./rest.js";
 app.use(rest);
 
 app.get('/', (req, res) => {

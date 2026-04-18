@@ -1,42 +1,33 @@
-const fs = require("fs");
+import fs from "fs";
 
-function readAll() {
-    const data = fs.readFileSync("db.json", "utf-8");
+export async function readAll() {
+    const data = await fs.promises.readFile("db.json", "utf-8");
     return JSON.parse(data);
 }
 
-function saveAll(items) {
-    fs.writeFileSync("db.json", JSON.stringify(items));
+export async function saveAll(items) {
+    await fs.promises.writeFile("db.json", JSON.stringify(items));
 }
 
-function getByID(id) {
-    const items = readAll();
+export async function getByID(id) {
+    const items = await readAll();
     return items[id];
 }
 
-function create(item) {
-    const items = readAll();
+export async function create(item) {
+    const items = await readAll();
     items.push(item);
-    saveAll(items);
+    await saveAll(items);
 }
 
-function update(id, newItem) {
-    const items = readAll();
+export async function update(id, newItem) {
+    const items = await readAll();
     items[id] = newItem;
-    saveAll(items);
+    await saveAll(items);
 }
 
-function remove(id) {
-    const items = readAll();
+export async function remove(id) {
+    const items = await readAll();
     items.splice(id, 1);
-    saveAll(items);
+    await saveAll(items);
 }
-
-module.exports = {
-    readAll,
-    saveAll,
-    create,
-    getByID,
-    update,
-    remove
-};
