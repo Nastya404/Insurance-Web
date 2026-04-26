@@ -34,6 +34,16 @@
             <button class="btn" onclick="addItem()">Добавить</button>
         </div>
 
+        <div class="container__table" style="width:100%; max-width:500px; margin-bottom:1rem">
+            <h4>Поиск полиса</h4>
+            <div style="display:flex; gap:0.5rem; align-items:center">
+                <input id="searchName" placeholder="Название полиса"
+                    style="flex:1; padding:0.5rem; border:1px solid #b8ddf7; border-radius:8px">
+                <button class="btn" type="button" onclick="searchPolicy()">Найти</button>
+                <button class="btn" type="button" onclick="sortPoliciesByName()">Сортировать по имени</button>
+            </div>
+        </div>
+
         <table class="products-table" style="width:100%">
             <thead>
                 <tr>
@@ -60,6 +70,11 @@
                     <% }) %>
             </tbody>
         </table>
+        <div style="display:flex; justify-content:center; align-items:center; gap:0.5rem; margin-top:1rem">
+            <button class="btn" type="button" onclick="changePage(-1)">Назад</button>
+            <span id="paginationInfo" style="color:#1a6fad; font-weight:600">Страница 1</span>
+            <button class="btn" type="button" onclick="changePage(1)">Вперед</button>
+        </div>
 
         <div id="editForm" class="about-block" style="display:none; width:100%; max-width:500px; margin-top:2rem">
             <h3>Редактировать полис</h3>
@@ -76,6 +91,11 @@
     </div>
 
     <script>
+        let highlightTimeoutId;
+        let sortAsc = true;
+        let currentPage = 1;
+        const rowsPerPage = 5;
+
         function deleteItem(id) {
             fetch('/items/' + id, { method: 'DELETE' })
                 .then(() => location.reload());
@@ -119,6 +139,88 @@
                 body: JSON.stringify({ name: name, description: desc })
             }).then(() => location.reload());
         }
+
+        function searchPolicy() {
+            const searchName = document.getElementById('searchName').value.trim().toLowerCase();
+            const rows = document.querySelectorAll('.products-table tbody tr');
+            let hasMatches = false;
+
+            clearTimeout(highlightTimeoutId);
+            clearSearchHighlight();
+
+            if (!searchName) {
+                return;
+            }
+
+            rows.forEach((row) => {
+                const nameCell = row.querySelector('td');
+                const policyName = nameCell ? nameCell.textContent.trim().toLowerCase() : '';
+
+                if (policyName.includes(searchName)) {
+                    row.style.backgroundColor = '#fff2a8';
+                    hasMatches = true;
+                }
+            });
+
+            if (!hasMatches) {
+                alert('Полис с таким названием не найден.');
+                return;
+            }
+
+            highlightTimeoutId = setTimeout(clearSearchHighlight, 2500);
+        }
+
+        function clearSearchHighlight() {
+            const rows = document.querySelectorAll('.products-table tbody tr');
+            rows.forEach((row) => {
+                row.style.backgroundColor = '';
+            });
+        }
+
+        function sortPoliciesByName() {
+            const tbody = document.querySelector('.products-table tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+
+            rows.sort((a, b) => {
+                const nameA = a.querySelector('td').textContent.trim().toLowerCase();
+                const nameB = b.querySelector('td').textContent.trim().toLowerCase();
+                return sortAsc ? nameA.localeCompare(nameB) : nameB.localeCompare(nameA);
+            });
+
+            rows.forEach((row) => tbody.appendChild(row));
+            sortAsc = !sortAsc;
+            showPage(1);
+        }
+
+        function getPolicyRows() {
+            return Array.from(document.querySelectorAll('.products-table tbody tr'));
+        }
+
+        function getTotalPages() {
+            const totalRows = getPolicyRows().length;
+            return Math.max(1, Math.ceil(totalRows / rowsPerPage));
+        }
+
+        function showPage(page) {
+            const rows = getPolicyRows();
+            const totalPages = getTotalPages();
+            currentPage = Math.min(Math.max(page, 1), totalPages);
+
+            const start = (currentPage - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+
+            rows.forEach((row, index) => {
+                row.style.display = index >= start && index < end ? '' : 'none';
+            });
+
+            document.getElementById('paginationInfo').textContent = `Страница ${currentPage} из ${totalPages}`;
+        }
+
+        function changePage(delta) {
+            showPage(currentPage + delta);
+        }
+
+        showPage(1);
         
     </script>
 

@@ -20,9 +20,6 @@ app.listen(PORT, () => {
     console.log(`Сервер запущен: http://localhost:${PORT}`);
 });
 
-app.get('/', (req, res) => {
-    res.send('Get an existing ens');
-});
 
 
 
