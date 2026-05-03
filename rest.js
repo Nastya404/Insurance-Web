@@ -4,8 +4,44 @@ const router = express.Router();
 
 router.get('/policies', async (req, res) => {
     try {
-        const items = await store.readAll();
-        res.render('policies', { items: items });
+        const ROWS_PER_PAGE = 3;
+
+        const pageRaw = Number.parseInt(req.query.page, 10);
+        const page = Number.isFinite(pageRaw) && pageRaw > 0 ? pageRaw : 1;
+
+        const sortOrder = req.query.sort === 'desc' ? 'desc' : 'asc';
+        const search = (req.query.search ?? '').toString().trim().toLowerCase();
+
+        let allItems = await store.readAll();
+
+        allItems = allItems.map((item, idx) => ({ ...item, id: idx }));
+
+        if (search) {
+            allItems = allItems.filter((item) =>
+                (item.name ?? '').toString().toLowerCase().includes(search)
+            );
+        }
+
+        allItems.sort((a, b) => {
+            const aName = (a.name ?? '').toString().toLowerCase();
+            const bName = (b.name ?? '').toString().toLowerCase();
+            const cmp = aName.localeCompare(bName, 'ru');
+            return sortOrder === 'asc' ? cmp : -cmp;
+        });
+
+        const totalItems = allItems.length;
+        const totalPages = Math.max(1, Math.ceil(totalItems / ROWS_PER_PAGE));
+        const safePage = Math.min(page, totalPages);
+        const start = (safePage - 1) * ROWS_PER_PAGE;
+        const items = allItems.slice(start, start + ROWS_PER_PAGE);
+
+        res.render('policies', {
+            items,
+            currentPage: safePage,
+            totalPages,
+            sortOrder,
+            search: (req.query.search ?? '').toString().trim(),
+        });
     }
     catch(err) {
         res.status(500).json({ message: err.message });
