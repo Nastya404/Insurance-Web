@@ -2,6 +2,10 @@ import express from 'express';
 import * as store from './store.js';
 const router = express.Router();
 
+router.get('/chat', (req, res) => {
+    res.render('chat');
+});
+
 router.get('/policies', async (req, res) => {
     try {
         const ROWS_PER_PAGE = 3;

@@ -50,6 +50,10 @@ function switchToPoliciesPage() {
     location.href = '/policies';
 }
 
+function switchToChatPage() {
+    location.href = '/chat';
+}
+
 // ВИД (View из MVC)
 
 function render() {

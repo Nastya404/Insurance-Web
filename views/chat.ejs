@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Чат-Викторина | СтрахГарант</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/stylesheets/chat.css">
+</head>
+<body>
+
+  <header class="chat-header">
+    <a href="/" class="back-link">&#8592; Главная</a>
+    <h1>Викторина «СтрахГарант»</h1>
+    <span class="header-sub">Чат-игра на знание страхования</span>
+  </header>
+
+  <!-- Экран входа -->
+  <div id="loginScreen" class="login-screen">
+    <div class="login-card">
+      <div class="login-card__icon">&#127942;</div>
+      <h2>Войти в игру</h2>
+      <p class="login-card__desc">Введите имя, чтобы присоединиться к викторине</p>
+      <input type="text" id="usernameInput" placeholder="Ваш никнейм" maxlength="20" autocomplete="off">
+      <button id="joinBtn">Начать</button>
+    </div>
+  </div>
+
+  <!-- Игровой экран -->
+  <div id="gameScreen" class="game-screen hidden">
+
+    <aside class="sidebar">
+      <div class="sidebar__section">
+        <h3>Игроки</h3>
+        <ul id="playerList" class="sidebar__list"></ul>
+      </div>
+      <div class="sidebar__divider"></div>
+      <div class="sidebar__section">
+        <h3>Счёт</h3>
+        <ul id="scoreList" class="sidebar__list sidebar__list--scores"></ul>
+      </div>
+    </aside>
+
+    <main class="chat-main">
+      <!-- Блок текущего вопроса -->
+      <div id="questionBox" class="question-box hidden">
+        <div class="question-meta">
+          <span id="questionCounter" class="question-counter"></span>
+          <span class="question-timer" id="questionTimer"></span>
+        </div>
+        <div id="questionText" class="question-text"></div>
+      </div>
+
+      <!-- Лента сообщений -->
+      <div id="messages" class="messages"></div>
+
+      <!-- Поле ввода -->
+      <div class="chat-input-area">
+        <input type="text" id="answerInput" placeholder="Введите ответ и нажмите Enter..." autocomplete="off">
+        <button id="sendBtn">Отправить</button>
+        <button id="startBtn" class="start-btn hidden">&#9654; Начать игру</button>
+      </div>
+    </main>
+
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/javascripts/chat.js"></script>
+</body>
+</html>
